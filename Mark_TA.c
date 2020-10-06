@@ -606,9 +606,9 @@ void Set_Config(u8 Type,Func)
 	switch(Type)
 	{
 		case 0x00:Set_BCDCK(6,Func,18,99);break;
-		case 0x01:Set_BCDCK(4,Func,1,12);break;
-		case 0x02:Set_BCDCK(3,Func,1,31);break;
-		case 0x03:Set_BCDCK(5,Func,1,7);break;
+		case 0x01:Set_BCDCK(5,Func,1,12);break;
+		case 0x02:Set_BCDCK(4,Func,1,31);break;
+		case 0x03:Set_BCDCK(3,Func,1,7);break;
 		
 		case 0x10:Set_BCDCK(2,Func,0,23);break;
 		case 0x11:Set_BCDCK(1,Func,0,59);break;
@@ -883,9 +883,9 @@ void PutSetValue(u8 Type)
 	switch(Type)
 	{
 		case 0x00:PT6311_PtTime(0xA2,DS3231_Init_Buf[6]>>4,((DS3231_Init_Buf[6]<<4)&0xF0)|0x0A);break;
-		case 0x01:PT6311_PtTime(0xAA,DS3231_Init_Buf[4],0xAA);break;
-		case 0x02:PT6311_PtTime(0xAA,DS3231_Init_Buf[3],0xAA);break;
-		case 0x03:PT6311_PtTime(0xAA,DS3231_Init_Buf[5],0xAA);break;
+		case 0x01:PT6311_PtTime(0xAA,DS3231_Init_Buf[5],0xAA);break;
+		case 0x02:PT6311_PtTime(0xAA,DS3231_Init_Buf[4],0xAA);break;
+		case 0x03:PT6311_PtTime(0xAA,DS3231_Init_Buf[3],0xAA);break;
 		
 		case 0x10:PT6311_PtTime(0xAA,DS3231_Init_Buf[2],0xAA);break;
 		case 0x11:PT6311_PtTime(0xAA,DS3231_Init_Buf[1],0xAA);break;
@@ -1022,7 +1022,6 @@ void Sleep_Process(void)
 
 void Uart_Process(void)		//Uart
 {
-	u8 i;
 	u8 CoCount = 0;
 	if(Uart_Overflow_Flag&&FlagAutoUSB)
 	{
@@ -1031,25 +1030,14 @@ void Uart_Process(void)		//Uart
 		Time_Show(0xAA,0xAA,0xAA,1);
 		Mode_Show("USB  ", 1000);
 		Mode_Show("READY", 1);
-		for(i=0;i<30;i++)
-		{
-			if (Uart_Overflow_Flag)
-			{
-				Uart_Overflow_Flag = False;
-				CoCount++;
-			}
-			delay_ms(50);
-		}
-		if(CoCount>1)
+		
+		
 		{
 			DS3231_SetUart();		//校准时间
 			Mode_Show("CPLET", 1000);
 			FlagAutoUSB = False;
 		}
-		else
-		{
-			Mode_Show("FAULT", 1000);
-		}
+		
 		PT6311_ReFush(VUSB, 0x00);
 		DisCount = 50;
 		SpeedControl = 0;

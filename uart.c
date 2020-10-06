@@ -51,7 +51,7 @@ void Uart_Init()
   EA = 1;  
 }
 
-u8 ReponseID[]={0xFF,0x55,'O','K',0x06,'M','a','r','k','T','C'};
+u8 ReponseID[]={0xFF,0x55,'O','K',0x06,'M','a','r','k','_','T','C'};
 void Analysismsg(u8* Buf)
 {
     int i;
@@ -102,7 +102,7 @@ void Uart_Int(void) interrupt 4
 //									Send_Data(Uart_Recv_Data);
 		if(Uart_Recv_Data == 0x7F)
 		{
-			if(Uart_Down_Step++ > 4)
+			if(Uart_Down_Step++ > 10)
 			{
 				Uart_Down_Step = 0;
 				Uart_Down_Ready = True;

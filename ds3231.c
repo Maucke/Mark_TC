@@ -173,12 +173,12 @@ void DS3231_SetTime(u8 *p)
 void DS3231_GetTime(void)
 {
 	DS3231_Us_Buf[6] = DS3231_ReadData(DS3231_YEAR);	//年
-	DS3231_Us_Buf[5] = DS3231_ReadData(DS3231_MONTH);	//月
-	DS3231_Us_Buf[4] = DS3231_ReadData(DS3231_DAY);	//日
-	DS3231_Us_Buf[3] = DS3231_ReadData(DS3231_WEEK);		//周
-	DS3231_Us_Buf[2] = DS3231_ReadData(DS3231_HOUR) & 0x3f;	//时 	
-	DS3231_Us_Buf[1] = DS3231_ReadData(DS3231_MINUTE);//分
-	DS3231_Us_Buf[0] = DS3231_ReadData(DS3231_SECOND);	//秒
+	DS3231_Us_Buf[5] = DS3231_ReadData(DS3231_MONTH) & Shield_monthBit;	//月
+	DS3231_Us_Buf[4] = DS3231_ReadData(DS3231_DAY) & Shield_dateBit;	//日
+	DS3231_Us_Buf[3] = DS3231_ReadData(DS3231_WEEK) & Shield_weekBit;		//周
+	DS3231_Us_Buf[2] = DS3231_ReadData(DS3231_HOUR) & Shield_hourBit;	//时 	
+	DS3231_Us_Buf[1] = DS3231_ReadData(DS3231_MINUTE) & Shield_minuteBit;//分
+	DS3231_Us_Buf[0] = DS3231_ReadData(DS3231_SECOND) & Shield_secondBit;	//秒
 }
 
 void DS3231_SetTimePrepar(u8 Type)
@@ -186,25 +186,25 @@ void DS3231_SetTimePrepar(u8 Type)
 	if(Type == 0)
 	{
 		DS3231_Init_Buf[6] = DS3231_ReadData(DS3231_YEAR);	//年
-		DS3231_Init_Buf[5] = DS3231_ReadData(DS3231_MONTH);	//月
-		DS3231_Init_Buf[4] = DS3231_ReadData(DS3231_DAY);	//日
-		DS3231_Init_Buf[3] = DS3231_ReadData(DS3231_WEEK);		//周
-		DS3231_Init_Buf[2] = DS3231_ReadData(DS3231_HOUR) & 0x3f;	//时 	
-		DS3231_Init_Buf[1] = DS3231_ReadData(DS3231_MINUTE);//分
-		DS3231_Init_Buf[0] = DS3231_ReadData(DS3231_SECOND);	//秒
+		DS3231_Init_Buf[5] = DS3231_ReadData(DS3231_MONTH) & Shield_monthBit;	//月
+		DS3231_Init_Buf[4] = DS3231_ReadData(DS3231_DAY) & Shield_dateBit;	//日
+		DS3231_Init_Buf[3] = DS3231_ReadData(DS3231_WEEK) & Shield_weekBit;		//周
+		DS3231_Init_Buf[2] = DS3231_ReadData(DS3231_HOUR) & Shield_hourBit;	//时 	
+		DS3231_Init_Buf[1] = DS3231_ReadData(DS3231_MINUTE) & Shield_minuteBit;//分
+		DS3231_Init_Buf[0] = DS3231_ReadData(DS3231_SECOND) & Shield_secondBit;	//秒
 	}
 	else if(Type == 1)
 	{
 		DS3231_Init_Buf[6] = DS3231_ReadData(DS3231_YEAR);	//年
-		DS3231_Init_Buf[5] = DS3231_ReadData(DS3231_MONTH);	//月
-		DS3231_Init_Buf[4] = DS3231_ReadData(DS3231_DAY);	//日
-		DS3231_Init_Buf[3] = DS3231_ReadData(DS3231_WEEK);		//周
+		DS3231_Init_Buf[5] = DS3231_ReadData(DS3231_MONTH) & Shield_monthBit;	//月
+		DS3231_Init_Buf[4] = DS3231_ReadData(DS3231_DAY) & Shield_dateBit;	//日
+		DS3231_Init_Buf[3] = DS3231_ReadData(DS3231_WEEK) & Shield_weekBit;		//周
 	}
 	else if(Type == 2)
 	{
-		DS3231_Init_Buf[2] = DS3231_ReadData(DS3231_HOUR) & 0x3f;	//时 	
-		DS3231_Init_Buf[1] = DS3231_ReadData(DS3231_MINUTE);//分
-		DS3231_Init_Buf[0] = DS3231_ReadData(DS3231_SECOND);	//秒
+		DS3231_Init_Buf[2] = DS3231_ReadData(DS3231_HOUR) & Shield_hourBit;	//时 	
+		DS3231_Init_Buf[1] = DS3231_ReadData(DS3231_MINUTE) & Shield_minuteBit;//分
+		DS3231_Init_Buf[0] = DS3231_ReadData(DS3231_SECOND) & Shield_secondBit;	//秒
 	}
 }
 

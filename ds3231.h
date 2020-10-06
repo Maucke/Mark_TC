@@ -51,6 +51,13 @@ extern u8 EEPROM_Buf[E2Length];
 #define DS3231_TEMPERATUREH 0x11    //温度寄存器高字节(8位)
 #define DS3231_TEMPERATUREL 0x12    //温度寄存器低字节(高2位)  
 
+#define Shield_secondBit			0x7f
+#define Shield_minuteBit			0x7f
+#define Shield_hourBit				0x3f
+#define Shield_weekBit				0x07
+#define Shield_dateBit				0x3f
+#define Shield_monthBit				0x1f
+
 extern u8 FlagAlarm;
 extern u8 FlagTimeGo;
 extern u16 RestCount;
